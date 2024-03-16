@@ -17,11 +17,12 @@
 
         <ImageView
             android:id="@+id/photoImageView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/recycler_image"
-            android:src="@drawable/logo" />
+             />
 
         <TextView
             android:id="@+id/nameTextView"
@@ -30,7 +31,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:padding="5dp"
-            android:text="@string/recycler_image" />
+             />
 
 
         <TextView
@@ -38,6 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@string/recycler_TextView" />
+            />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
