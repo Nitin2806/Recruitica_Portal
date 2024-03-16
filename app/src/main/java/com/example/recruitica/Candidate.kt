@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 interface OnCandidateClickListener {
@@ -22,6 +23,14 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_candidate
+        val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
+
+        val menuResId = if (isLoggedIn) R.menu.bottom_nav_menu_logged_out else  R.menu.bottom_nav_menu
+
+        bottomNavigationView.menu.clear()
+        bottomNavigationView.inflateMenu(menuResId)
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -36,6 +45,10 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
 
                 R.id.navigation_candidate -> {
                     startActivity(Intent(this, Candidate::class.java))
+                    true
+                }
+                R.id.navigation_logout -> {
+                    FirebaseAuth.getInstance().signOut()
                     true
                 }
 
