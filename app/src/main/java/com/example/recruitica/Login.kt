@@ -31,6 +31,14 @@ class Login : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         bottomNavigationView.selectedItemId = R.id.navigation_login
+        val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
+
+        val menuResId = if (isLoggedIn) R.menu.bottom_nav_menu_logged_out else  R.menu.bottom_nav_menu
+
+        bottomNavigationView.menu.clear()
+        bottomNavigationView.inflateMenu(menuResId)
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -39,7 +47,7 @@ class Login : AppCompatActivity() {
                 }
 
                 R.id.navigation_login -> {
-                    // No need to start Login activity again
+                    startActivity(Intent(this, Login::class.java))
                     true
                 }
 
@@ -47,11 +55,14 @@ class Login : AppCompatActivity() {
                     startActivity(Intent(this, Candidate::class.java))
                     true
                 }
+                R.id.navigation_logout -> {
+                    FirebaseAuth.getInstance().signOut()
+                    true
+                }
 
                 else -> false
             }
         }
-
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val loginButton: Button = findViewById(R.id.loginButton)
