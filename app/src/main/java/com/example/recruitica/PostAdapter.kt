@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PostAdapter(private val postList: List<PostData>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+class PostAdapter(private var postList: List<PostData>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.post_layout, parent, false)
@@ -21,6 +21,10 @@ class PostAdapter(private val postList: List<PostData>) : RecyclerView.Adapter<P
 
     override fun getItemCount(): Int {
         return postList.size
+    }
+    fun updateData(newList: List<PostData>) {
+        postList = newList
+        notifyDataSetChanged()
     }
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

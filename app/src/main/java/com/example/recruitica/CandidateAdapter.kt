@@ -1,8 +1,6 @@
 package com.example.recruitica
 
-import android.content.Intent
-import android.os.Parcelable
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.bumptech.glide.Glide
 
 class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private val clickListener: OnCandidateClickListener) :
     FirebaseRecyclerAdapter<CandidateData, CandidateAdapter.MyViewHolder>(options) {
@@ -40,5 +39,10 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
         holder.bind(model)
         holder.nameTextView.text = model.name
         holder.titleTextView.text = model.bio
+
+        Glide.with(holder.itemView.context)
+            .load(model.photo)
+            .into(holder.imgPhoto)
     }
+
 }
