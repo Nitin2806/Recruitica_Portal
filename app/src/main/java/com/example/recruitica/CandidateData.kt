@@ -3,7 +3,7 @@ package com.example.recruitica
 import android.os.Parcel
 import android.os.Parcelable
 
-// Class for Candidate Data
+// Class for holding Candidate Data
 data class CandidateData(
     var userID: Int = 0,
     var name: String = "",
@@ -15,7 +15,8 @@ data class CandidateData(
     var username: String = "",
     var password: String = "",
 
-) : Parcelable {
+    ) : Parcelable {
+    //making parcelable data
     constructor(parcel: Parcel) : this(
         parcel.readInt()?:0,
         parcel.readString() ?: "",
@@ -27,9 +28,9 @@ data class CandidateData(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
 
-    )
+        )
 
-    // Creating a Parcelable data to pass in different components
+    // Parcelable data to pass in components
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(userID)
         parcel.writeString(name)
