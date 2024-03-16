@@ -19,7 +19,7 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_candidate)
-
+        // Bottom Navigation Bar for menus
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_candidate
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -43,20 +43,26 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
             }
         }
 
+        // Getting instance for users
         val query = FirebaseDatabase.getInstance().reference.child("users")
 
+        //Building components for users data to DataClass
         val options = FirebaseRecyclerOptions.Builder<CandidateData>()
             .setQuery(query, CandidateData::class.java)
             .build()
 
-
+        // Calling Candidate Adapter
         adapter = CandidateAdapter(options,this)
 
+        //Calling RecyclerView
         val rView: RecyclerView = findViewById(R.id.candidateRecyclerView)
+
+        //Referecing Linear layout
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
     }
     override fun onCandidateClick(candidateData: CandidateData) {
+        // On Click functionality to intent Details class
         val intent = Intent(this, Detail::class.java)
         intent.putExtra("candidateData", candidateData)
         startActivity(intent)

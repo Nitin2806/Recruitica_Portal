@@ -15,25 +15,28 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private val clickListener: OnCandidateClickListener) :
     FirebaseRecyclerAdapter<CandidateData, CandidateAdapter.MyViewHolder>(options) {
 
-   inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-       fun bind(candidateData: CandidateData) {
-           itemView.setOnClickListener {
-               clickListener.onCandidateClick(candidateData)
-           }
-       }
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(candidateData: CandidateData) {
+            itemView.setOnClickListener {
+                //setting data for click-listener
+                clickListener.onCandidateClick(candidateData)
+            }
+        }
+        //Declaring Variables for Views
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val imgPhoto: ImageView = itemView.findViewById(R.id.photoImageView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-
+// oncreate function to inflate layout
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.row_layout, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: CandidateData) {
+        //binding the data to recyclerview
         holder.bind(model)
         holder.nameTextView.text = model.name
         holder.titleTextView.text = model.bio
