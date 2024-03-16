@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1083695346957",
+    "firebase_url": "https://recruitica-8c2be-default-rtdb.firebaseio.com",
+    "project_id": "recruitica-8c2be",
+    "storage_bucket": "recruitica-8c2be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083695346957:android:ac0abd28c77db32edfec44",
+        "android_client_info": {
+          "package_name": "com.example.recruitica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083695346957-2sum0djs06s2ojv6lqmv9b7i9407aq7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCF9_kbhMXJz4-y7Pt3cDmSVpUNi7x0uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083695346957-2sum0djs06s2ojv6lqmv9b7i9407aq7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
