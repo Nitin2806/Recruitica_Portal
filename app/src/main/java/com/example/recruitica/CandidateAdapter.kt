@@ -16,7 +16,7 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
     FirebaseRecyclerAdapter<CandidateData, CandidateAdapter.MyViewHolder>(options) {
 
    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+//binding data for recycler view
        fun bind(candidateData: CandidateData, uid: String) {
            Log.d("candidate uid",uid)
            itemView.setOnClickListener {
@@ -35,13 +35,13 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
             .inflate(R.layout.row_layout, parent, false)
         return MyViewHolder(view)
     }
-
+//binding to viewholder
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: CandidateData) {
         val uid = getRef(position).key
         holder.bind(model, uid ?: "")
         holder.nameTextView.text = model.name
         holder.titleTextView.text = model.bio
-
+//added imageview using glide
         Glide.with(holder.itemView.context)
             .load(model.photo)
             .into(holder.imgPhoto)
