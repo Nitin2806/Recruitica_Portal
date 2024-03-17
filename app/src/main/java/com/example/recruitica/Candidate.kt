@@ -21,11 +21,11 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_candidate)
-        // Bottom Navigation Bar for menus
+        // Bottom Navigation Bar for menu both logout and login
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_candidate
         val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
-
+ // selecting layouts
         val menuResId = if (isLoggedIn) R.menu.bottom_nav_menu_logged_out else  R.menu.bottom_nav_menu
 
         bottomNavigationView.menu.clear()
@@ -38,6 +38,7 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
                 R.id.navigation_login -> startActivity(Intent(this, Login::class.java))
                 R.id.navigation_candidate -> startActivity(Intent(this, Candidate::class.java))
                 R.id.navigation_logout -> {
+                    //signout button for users
                     FirebaseAuth.getInstance().signOut()
                     startActivity(Intent(this, Login::class.java))
                     finishAffinity()
@@ -64,14 +65,16 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
     }
+
+    //onclick of card
     override fun onCandidateClick(candidateData: CandidateData, uid: String) {
         Log.d("Candidate",uid)
         val intent = Intent(this, Detail::class.java)
         intent.putExtra("candidateData", candidateData)
-        intent.putExtra("uid", uid)
+        intent.putExtra("uid", uid) //adding uid for details view
         startActivity(intent)
     }
-
+//listen to adapter when activity starts
     override fun onStart() {
         super.onStart()
         adapter.startListening()
@@ -82,3 +85,5 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
     }
 
 }
+
+//reference used from android.com and medium

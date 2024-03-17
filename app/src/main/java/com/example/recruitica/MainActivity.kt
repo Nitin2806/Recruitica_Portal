@@ -24,17 +24,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //getting instance for current user
         auth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
+
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-
-        val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
-
+        val isLoggedIn = FirebaseAuth.getInstance().currentUser != null //checkif user is loggedin
         val menuResId = if (isLoggedIn) R.menu.bottom_nav_menu_logged_out else  R.menu.bottom_nav_menu
 
         bottomNavigationView.menu.clear()
         bottomNavigationView.inflateMenu(menuResId)
-
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -58,8 +57,11 @@ class MainActivity : AppCompatActivity() {
         loadPostsFromFirebase()
     }
     private fun loadPostsFromFirebase() {
+
+        //load post from firebase
         val currentUserID = auth.currentUser?.uid
         if (currentUserID != null) {
+            //getting data for current user uid for all connections
             mDatabase.child("connections").child(currentUserID)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -68,6 +70,8 @@ class MainActivity : AppCompatActivity() {
 
                         connections.forEach { connectionSnapshot ->
                             val userID = connectionSnapshot.key
+
+                            //fetching posts details for userID
                             mDatabase.child("posts").orderByChild("userID").equalTo(userID)
                                 .addListenerForSingleValueEvent(object : ValueEventListener {
                                     override fun onDataChange(postsSnapshot: DataSnapshot) {
