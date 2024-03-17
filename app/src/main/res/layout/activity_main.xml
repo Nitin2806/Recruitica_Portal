@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+<!--textview for header-->
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+<!--footer after recycler view-->
         <TextView
             android:id="@+id/sloganTextView"
             android:layout_width="match_parent"
@@ -49,3 +49,6 @@
         android:background="?android:attr/windowBackground"/>
 
 </RelativeLayout>
+
+
+<!--reference from stackoverflow and android.com-->

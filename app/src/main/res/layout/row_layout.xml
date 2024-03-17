@@ -8,7 +8,7 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
-
+<!--layout for the photo-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +23,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/recycler_image"
              />
+<!--        layout for other information-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,3 +47,5 @@
     </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
+
+<!--reference android.com https://developer.android.com/develop/ui/views/layout/recyclerview-->
