@@ -5,4 +5,35 @@
     <color name="MaterialDesignBlue">#E6ECF3</color>
     <color name="MaterialDesignGreen">#E0F2E9</color>
     <color name="LightGray">#F0F0F0</color>
+
+    <!-- Shades of Blue -->
+    <color name="navyBlue">#000080</color>
+    <color name="darkBlue">#00008B</color>
+    <color name="lightBlue">#6495ED</color>
+
+    <!-- Shades of Gray -->
+    <color name="darkGray">#555555</color>
+    <color name="mediumGray">#808080</color>
+    <color name="lightGray">#D3D3D3</color>
+
+    <!-- Shades of Green -->
+    <color name="darkGreen">#006400</color>
+    <color name="mediumGreen">#2E8B57</color>
+    <color name="lightGreen">#90EE90</color>
+
+    <!-- Shades of Purple -->
+    <color name="darkPurple">#800080</color>
+    <color name="mediumPurple">#9370DB</color>
+    <color name="lightPurple">#D8BFD8</color>
+
+    <!-- Shades of Red -->
+    <color name="darkRed">#8B0000</color>
+    <color name="mediumRed">#CD5C5C</color>
+    <color name="lightRed">#FFC0CB</color>
+
+    <!-- Additional Shades -->
+    <color name="orange">#FFA500</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="cyan">#00FFFF</color>
+    <color name="magenta">#FF00FF</color>
 </resources>

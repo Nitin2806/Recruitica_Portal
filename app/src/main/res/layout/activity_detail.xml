@@ -27,7 +27,6 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo"
                 android:contentDescription="@string/profilepicture" />
 
             <LinearLayout
@@ -42,37 +41,42 @@
                     android:id="@+id/nameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text=""
-                    android:textStyle="bold" />
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:text="Candidate Name" />
 
                 <TextView
                     android:id="@+id/companyTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="Company Name" />
 
                 <TextView
                     android:id="@+id/locationTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="Location" />
 
                 <TextView
                     android:id="@+id/bioTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="Biography: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus dapibus metus, at efficitur nisl fermentum nec. Donec vel pretium velit, at scelerisque magna. " />
 
                 <Button
                     android:id="@+id/connectButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/connect" />
+                    android:text="@string/connect"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/darkBlue"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -87,6 +91,8 @@
         android:layout_marginEnd="16dp"
         android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

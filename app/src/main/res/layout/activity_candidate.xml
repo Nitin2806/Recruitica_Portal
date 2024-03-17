@@ -7,11 +7,45 @@
     android:id="@+id/candidateView"
     tools:context=".Candidate">
 
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#000080"
+        android:textColor="#FFFFFF"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000080"
+            android:textColor="#FFFFFF"
+            android:text="Discover Talented Professionals"
+            android:textSize="24sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/subtitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Find and connect with skilled candidates for your team."
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <!-- RecyclerView for Candidates -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/candidateRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLayout"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:clipToPadding="false"
         android:layout_marginBottom="?android:attr/actionBarSize" />
 

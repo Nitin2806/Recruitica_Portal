@@ -31,4 +31,6 @@
     <string name="gender">Gender</string>
     <string name="location">Location</string>
     <string name="name">Name</string>
+    <string name="welcome_to_recruitica">Welcome to Recruitica</string>
+    <string name="connect_learn_and_grow_your_professional_network">Connect, Learn, and Grow Your Professional Network</string>
 </resources>
