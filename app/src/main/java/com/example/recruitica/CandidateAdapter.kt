@@ -23,13 +23,14 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
                clickListener.onCandidateClick(candidateData,uid)
            }
        }
+
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val imgPhoto: ImageView = itemView.findViewById(R.id.photoImageView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-
+// oncreate function to inflate layout
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.row_layout, parent, false)
         return MyViewHolder(view)
@@ -38,7 +39,6 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: CandidateData) {
         val uid = getRef(position).key
         holder.bind(model, uid ?: "")
-
         holder.nameTextView.text = model.name
         holder.titleTextView.text = model.bio
 
