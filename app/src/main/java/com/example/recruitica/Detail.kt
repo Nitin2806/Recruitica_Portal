@@ -3,6 +3,7 @@ package com.example.recruitica
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,6 +20,7 @@ import com.google.firebase.database.*
 class Detail : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var mauth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
     private lateinit var adapter: PostAdapter
     private lateinit var postsRecyclerView: RecyclerView
@@ -35,6 +37,7 @@ class Detail : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         auth = Firebase.auth
+
         if (auth.currentUser == null) {
             startActivity(Intent(this, Login::class.java))
             finish()
@@ -85,9 +88,9 @@ class Detail : AppCompatActivity() {
 
         mDatabase = FirebaseDatabase.getInstance().reference
 
-        auth = FirebaseAuth.getInstance()
+        mauth = FirebaseAuth.getInstance()
 
-        val currentUser = auth.currentUser
+        val currentUser = mauth.currentUser
         val candidateData = intent.getParcelableExtra<CandidateData>("candidateData")
         val uid= intent.getStringExtra("uid")
         if (currentUser != null) {
@@ -96,9 +99,10 @@ class Detail : AppCompatActivity() {
         }
         candidateData?.let { data ->
             if (uid != null) {
-                fetchAndDisplayUserDetails(uid)
+                displayUserDetails(uid)
             }
-            fetchAndDisplayPosts(data.userID.toString())
+            displayPosts(data.userID.toString())
+            checkConnectionStatus(data.userID.toString())
         }
 
         connectButton.setOnClickListener {
@@ -116,7 +120,7 @@ class Detail : AppCompatActivity() {
         }
     }
 
-    private fun fetchAndDisplayUserDetails(userID: String) {
+    private fun displayUserDetails(userID: String) {
         Log.d("Details on fetchAndDisplayUserDetails UserID ", userID)
         mDatabase.child("users").child(userID)
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -126,6 +130,7 @@ class Detail : AppCompatActivity() {
                     Log.d("Details on fetchAndDisplayUserDetails ", user.toString())
                     user?.let {
                         updateUIWithUserData(user)
+
                     }
                 }
 
@@ -136,7 +141,7 @@ class Detail : AppCompatActivity() {
     }
 
 
-    private fun fetchAndDisplayPosts(userID: String) {
+    private fun displayPosts(userID: String) {
 
         val postsQuery = FirebaseDatabase.getInstance().reference.child("posts")
 
@@ -176,7 +181,23 @@ class Detail : AppCompatActivity() {
 
         Log.d(TAG, "UI updated with user data")
     }
+    private fun checkConnectionStatus(otherUserID: String) {
+        val currentUserID = auth.currentUser!!.uid
+        val connectionRef = mDatabase.child("connections").child(currentUserID).child(otherUserID)
+        connectionRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    connectButton.visibility = View.GONE
+                } else {
+                    connectButton.visibility = View.VISIBLE
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "Failed to check connection status: ${error.message}")
+            }
+        })
+    }
     private fun displayPosts(posts: List<PostData>) {
         postsRecyclerView = findViewById(R.id.postsRecyclerView)
         postsRecyclerView.layoutManager = LinearLayoutManager(this)

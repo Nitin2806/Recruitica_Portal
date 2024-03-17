@@ -1,5 +1,6 @@
 package com.example.recruitica
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,11 +35,13 @@ class PostAdapter(private var postList: List<PostData>) : RecyclerView.Adapter<P
         private val likesView: TextView = itemView.findViewById(R.id.likesTextView)
 
         fun bind(post: PostData) {
+            Log.d("Post",post.toString())
 
             val description = post.description ?: ""
             val title= post.title ?: ""
             val image= post.imageURL ?: ""
-            val likes = post.likes ?: ""
+            val likes = post.likes ?: 0
+
             titleTextView.text= title
             likesView.text= likes.toString()
             contentTextView.text = description
