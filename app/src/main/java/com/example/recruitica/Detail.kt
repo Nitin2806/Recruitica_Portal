@@ -1,4 +1,5 @@
 package com.example.recruitica
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-
 import com.google.firebase.database.*
 
 class Detail : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-
     private lateinit var mDatabase: DatabaseReference
     private lateinit var adapter: PostAdapter
     private lateinit var postsRecyclerView: RecyclerView
@@ -44,17 +43,13 @@ class Detail : AppCompatActivity() {
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-
         bottomNavigationView.selectedItemId = R.id.navigation_candidate
 
-
+        //Check for loggedIn user to load menu
         val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
-
         val menuResId = if (isLoggedIn) R.menu.bottom_nav_menu_logged_out else  R.menu.bottom_nav_menu
-
         bottomNavigationView.menu.clear()
         bottomNavigationView.inflateMenu(menuResId)
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -80,6 +75,7 @@ class Detail : AppCompatActivity() {
                 else -> false
             }
         }
+
         nameTextView = findViewById(R.id.nameTextView)
         companyTextView = findViewById(R.id.companyTextView)
         locationTextView = findViewById(R.id.locationTextView)
@@ -90,16 +86,19 @@ class Detail : AppCompatActivity() {
         mDatabase = FirebaseDatabase.getInstance().reference
 
         auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
 
+        val currentUser = auth.currentUser
         val candidateData = intent.getParcelableExtra<CandidateData>("candidateData")
+        val uid= intent.getStringExtra("uid")
         if (currentUser != null) {
+            Log.d("Detail", currentUser.toString())
             userID = currentUser.uid
         }
         candidateData?.let { data ->
-            fetchAndDisplayUserDetails(userID)
+            if (uid != null) {
+                fetchAndDisplayUserDetails(uid)
+            }
             fetchAndDisplayPosts(data.userID.toString())
-
         }
 
         connectButton.setOnClickListener {
@@ -110,11 +109,9 @@ class Detail : AppCompatActivity() {
             connectionRef.setValue(true)
                 .addOnSuccessListener {
                     Log.d(TAG, "Connection added successfully")
-                    // You can perform additional actions after adding connection
                 }
                 .addOnFailureListener { e ->
                     Log.e(TAG, "Failed to add connection: ${e.message}")
-                    // Handle failure
                 }
         }
     }
@@ -137,6 +134,7 @@ class Detail : AppCompatActivity() {
                 }
             })
     }
+
 
     private fun fetchAndDisplayPosts(userID: String) {
 

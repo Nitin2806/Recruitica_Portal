@@ -1,6 +1,7 @@
 package com.example.recruitica
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +15,15 @@ import com.bumptech.glide.Glide
 class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private val clickListener: OnCandidateClickListener) :
     FirebaseRecyclerAdapter<CandidateData, CandidateAdapter.MyViewHolder>(options) {
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(candidateData: CandidateData) {
-            itemView.setOnClickListener {
-                //setting data for click-listener
-                clickListener.onCandidateClick(candidateData)
-            }
-        }
-        //Declaring Variables for Views
+   inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+       fun bind(candidateData: CandidateData, uid: String) {
+           Log.d("candidate uid",uid)
+           itemView.setOnClickListener {
+               clickListener.onCandidateClick(candidateData,uid)
+           }
+       }
+
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val imgPhoto: ImageView = itemView.findViewById(R.id.photoImageView)
@@ -35,8 +37,8 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: CandidateData) {
-        //binding the data to recyclerview
-        holder.bind(model)
+        val uid = getRef(position).key
+        holder.bind(model, uid ?: "")
         holder.nameTextView.text = model.name
         holder.titleTextView.text = model.bio
 
