@@ -20,7 +20,7 @@ import com.google.firebase.database.*
 class Detail : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var mauth: FirebaseAuth
+    private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
     private lateinit var adapter: PostAdapter
     private lateinit var postsRecyclerView: RecyclerView
@@ -54,29 +54,18 @@ class Detail : AppCompatActivity() {
         bottomNavigationView.menu.clear()
         bottomNavigationView.inflateMenu(menuResId)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    true
-                }
-
-                R.id.navigation_login -> {
-                    startActivity(Intent(this, Login::class.java))
-                    true
-                }
-
-                R.id.navigation_candidate -> {
-                    startActivity(Intent(this, Candidate::class.java))
-                    true
-                }
+                R.id.navigation_home -> startActivity(Intent(this, MainActivity::class.java))
+                R.id.navigation_login -> startActivity(Intent(this, Login::class.java))
+                R.id.navigation_candidate -> startActivity(Intent(this, Candidate::class.java))
                 R.id.navigation_logout -> {
                     FirebaseAuth.getInstance().signOut()
-                    true
+                    startActivity(Intent(this, Login::class.java))
+                    finishAffinity()
                 }
-
-                else -> false
             }
+            true
         }
 
         nameTextView = findViewById(R.id.nameTextView)
@@ -88,9 +77,9 @@ class Detail : AppCompatActivity() {
 
         mDatabase = FirebaseDatabase.getInstance().reference
 
-        mauth = FirebaseAuth.getInstance()
+        mAuth = FirebaseAuth.getInstance()
 
-        val currentUser = mauth.currentUser
+        val currentUser = mAuth.currentUser
         val candidateData = intent.getParcelableExtra<CandidateData>("candidateData")
         val uid= intent.getStringExtra("uid")
         if (currentUser != null) {
@@ -154,7 +143,7 @@ class Detail : AppCompatActivity() {
                     val post = postSnapshot.getValue(PostData::class.java)
 
                     if (post?.userID == userID) {
-                        post?.let {
+                        post.let {
                             postList.add(it)
                         }
                     }

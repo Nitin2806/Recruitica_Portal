@@ -36,30 +36,21 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.inflateMenu(menuResId)
 
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    true
-                }
-
-                R.id.navigation_login -> {
-                    startActivity(Intent(this, Login::class.java))
-                    true
-                }
-
-                R.id.navigation_candidate -> {
-                    startActivity(Intent(this, Candidate::class.java))
-                    true
-                }
+                R.id.navigation_home -> startActivity(Intent(this, MainActivity::class.java))
+                R.id.navigation_login -> startActivity(Intent(this, Login::class.java))
+                R.id.navigation_candidate -> startActivity(Intent(this, Candidate::class.java))
                 R.id.navigation_logout -> {
                     FirebaseAuth.getInstance().signOut()
-                    true
+                    startActivity(Intent(this, Login::class.java))
+                    finishAffinity()
                 }
-
-                else -> false
             }
+            true
         }
+
+
         postsRecyclerView = findViewById(R.id.postsRecyclerView)
         postsRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = PostAdapter(ArrayList())
