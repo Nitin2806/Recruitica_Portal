@@ -1,6 +1,7 @@
 package com.example.recruitica
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,11 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
     FirebaseRecyclerAdapter<CandidateData, CandidateAdapter.MyViewHolder>(options) {
 
    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-       fun bind(candidateData: CandidateData) {
+
+       fun bind(candidateData: CandidateData, uid: String) {
+           Log.d("candidate uid",uid)
            itemView.setOnClickListener {
-               clickListener.onCandidateClick(candidateData)
+               clickListener.onCandidateClick(candidateData,uid)
            }
        }
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
@@ -33,7 +36,9 @@ class CandidateAdapter(options: FirebaseRecyclerOptions<CandidateData>, private 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: CandidateData) {
-        holder.bind(model)
+        val uid = getRef(position).key
+        holder.bind(model, uid ?: "")
+
         holder.nameTextView.text = model.name
         holder.titleTextView.text = model.bio
 

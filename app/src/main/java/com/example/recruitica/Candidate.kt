@@ -3,6 +3,7 @@ package com.example.recruitica
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -11,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 interface OnCandidateClickListener {
-    fun onCandidateClick(candidateData: CandidateData)
+    fun onCandidateClick(candidateData: CandidateData,uid:String)
 }
 
 class Candidate : AppCompatActivity(),OnCandidateClickListener {
@@ -69,9 +70,11 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
     }
-    override fun onCandidateClick(candidateData: CandidateData) {
+    override fun onCandidateClick(candidateData: CandidateData, uid: String) {
+        Log.d("Candidate",uid)
         val intent = Intent(this, Detail::class.java)
         intent.putExtra("candidateData", candidateData)
+        intent.putExtra("uid", uid)
         startActivity(intent)
     }
 
