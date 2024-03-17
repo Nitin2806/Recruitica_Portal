@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/candidateView"
     tools:context=".Candidate">
-
+<!-- Linear layout for the header-->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:id="@+id/subtitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Find and connect with skilled candidates for your team."
+            android:text="Find and connect with people around."
             android:textSize="16sp"
             android:gravity="center"
             android:textColor="@android:color/darker_gray"
@@ -48,7 +48,7 @@
         android:paddingEnd="16dp"
         android:clipToPadding="false"
         android:layout_marginBottom="?android:attr/actionBarSize" />
-
+<!--Bottom nav bar-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
