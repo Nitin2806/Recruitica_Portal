@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.menu.clear()
         bottomNavigationView.inflateMenu(menuResId)
+        bottomNavigationView.selectedItemId = R.id.navigation_home
 
 
         bottomNavigationView.setOnItemSelectedListener { item ->

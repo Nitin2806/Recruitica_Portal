@@ -113,12 +113,15 @@ class Signup : AppCompatActivity() {
         userData["email"] = email
         userData["gender"] = gender
         userData["location"] = location
+        userData["company"] = "Recruitica"
+        userData["bio"] = "My New Profile on Recruitica"
+        userData["photo"] = "https://firebasestorage.googleapis.com/v0/b/recruitica-8c2be.appspot.com/o/logo.png?alt=media&token=9ec2840c-c6d7-4ac0-a75a-c2dbce9f3715"
         userData["userID"] = userCount + 1
 
         usersRef.child(userID).setValue(userData)
             .addOnSuccessListener {
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
             }
     }
 }
