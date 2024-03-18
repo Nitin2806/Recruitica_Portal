@@ -38,7 +38,7 @@ class Login : AppCompatActivity() {
         bottomNavigationView.menu.clear()
         bottomNavigationView.inflateMenu(menuResId)
 
-
+        bottomNavigationView.selectedItemId = R.id.navigation_login
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> startActivity(Intent(this, MainActivity::class.java))

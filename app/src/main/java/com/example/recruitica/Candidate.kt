@@ -31,7 +31,7 @@ class Candidate : AppCompatActivity(),OnCandidateClickListener {
         bottomNavigationView.menu.clear()
         bottomNavigationView.inflateMenu(menuResId)
 
-
+        bottomNavigationView.selectedItemId = R.id.navigation_candidate
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> startActivity(Intent(this, MainActivity::class.java))
